@@ -1,0 +1,29 @@
+{% extends 'layout/base-layout.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="wrapper">
+        <div class="sidebar">
+            <img src="{% static 'img/store.png' %}" alt="logo" width="50" height="70" style="margin-bottom: 10px">
+            <h5>MY SHOP</h5>
+            <ul>
+                <li><a href="{% url 'demo:demo-list' %}"><i class="fas fa-users"></i>Demo</a></li>
+                <li><a href=""><i class="fas fa-users"></i>Human Resource</a></li>
+                <li><a href=""><i class="fas fa-search-dollar"></i>Sale & Marketing</a></li>
+                <li><a href=""><i class="fas fa-hand-holding-usd"></i>Finance</a></li>
+                <li><a href=""><i class="fas fa-hotel"></i>Inventory</a></li>
+                <li><a href=""><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            </ul>
+
+        </div>
+        <div class="main_content">
+            <div class="info">
+                <div class="container-fluid">
+                    {% block content %} {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

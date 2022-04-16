@@ -1,0 +1,147 @@
+{% extends 'layout/dashboard-layout.html' %}
+
+
+{% block content %}
+    <form action="" method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <a href="{% url 'transaction:transaction-list' %}" style="text-decoration: none;color: black"><h3>
+            Transaction</h3></a>
+
+
+        <div class="card rounded">
+
+            <div class="card-header {% if object %} bg-warning {% else %} bg-success {% endif %} ">
+                <h5 class="text-white">
+
+                    {% if object %} Update{% else %}New {% endif %}
+                </h5>
+            </div>
+
+            <div class="card-body">
+
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <label for="transaction_id" class="form-label">Transaction Id</label>
+                        <input type="text" class="form-control" id="transaction_id"
+                               value="{% if object.transaction_id %} {{ object.transaction_id }}{% else %}{{ uid }}{% endif %} "
+                               name="transaction_id"
+                               readonly>
+                    </div>
+                    <div class="col">
+                        <label for="date" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="date" value="{{ object.date |date:'Y-m-d' }}"
+                               required
+                               name="date">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please choose a date.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col ">
+                        <label for="account" class="form-label">Account</label>
+                        <select class="form-select" id="account" required name="account">
+                            <option selected disabled value="">Choose...</option>
+                            <option value="Malabe BOC" {% if object.account == "Malabe BOC" %} selected {% endif %} >
+                                Malabe BOC
+                            </option>
+                            <option value="Galle HNB" {% if object.account == "Galle HNB" %} selected {% endif %}> Galle
+                                HNB
+                            </option>
+                            <option value="Kandy Sampath" {% if object.account == "Kandy Sampath" %}
+                                    selected {% endif %}> Galle Sampath
+                            </option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a account.
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="account" class="form-label">Category</label>
+                        <select class="form-select" id="account" required name="category">
+                            <option selected disabled value="">Choose...</option>
+                            <option value="Water bills" {% if object.account == "Water bills" %} selected {% endif %} >
+                                Water bills
+                            </option>
+                            <option value="Electricity bill" {% if object.account == "Electricity bill" %}
+                                    selected {% endif %}> Electricity bill
+                            </option>
+                            <option value="Travel" {% if object.account == "Travel" %} selected {% endif %}> Travel
+                            </option>
+                            <option value="Other" {% if object.account == "Other" %} selected {% endif %}> Other
+                            </option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a Category.
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="reference_no" class="form-label">Reference No</label>
+                        <input type="text" class="form-control" id="reference_no" value="{{ object.reference_no }}"
+                               name="reference_no"
+                               required>
+                        <div class="invalid-feedback">
+                            Please provide a valid reference no.
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="validationCustomUsername" class="form-label">Total Amount</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="inputGroupPrepend">Rs</span>
+                            <input type="number" class="form-control" id="validationCustomUsername"
+                                   value="{{ object.total_amount }}" required name="total_amount">
+                            <div class="invalid-feedback">
+                                Please provide a amount.
+                            </div>
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                </div>
+                {% include 'common/form-area-input.html' with field=form.remark %}
+
+                <div class="row">
+
+                    <div class=" col text-center justify-content-center align-self-center">
+                        <button type="submit"
+                                class="btn text-white {% if object %} bg-warning {% else %} bg-success {% endif %}"
+                                style="width: 100px; margin-right: 100px">
+                            {% if object %} Update{% else %}Save {% endif %}
+                        </button>
+                        <button type="reset" class="btn btn-danger" style="width: 100px">Clear</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </form>
+
+
+{% endblock %}
+
+
+{% block model %}
+
+{% endblock %}

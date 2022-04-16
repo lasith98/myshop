@@ -1,0 +1,124 @@
+{% extends 'layout/dashboard-layout.html' %}
+
+{% block content %}
+
+
+    <a href="{% url 'transaction:transaction-list' %}" style="text-decoration: none;color: #212529"><h3>Transaction</h3>
+    </a>
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <div class="row">
+                <div class="col">
+                    <a role="button" class="btn btn-success" style="color: whitesmoke"
+                       href="{% url 'transaction:transaction-create' %}"><i class="fas fa-plus"></i> New Transaction</a>
+                </div>
+                <div class="col">
+                    <form action="" method="get" id="search-form">
+                        <div class="row">
+
+
+                            <div class="col">
+                                <label for="exampleDataList" class="form-label">Transaction Id</label>
+                                <input class="form-control form-control-sm" id="exampleDataList"
+                                       placeholder="Type to search..." name="query" value="{{ query }}">
+                            </div>
+                            <div class="col">
+                                <label for="exampleDataList" class="form-label">From</label>
+                                <input type="date" class="form-control form-control-sm" name="from" value="{{ from }}">
+                            </div>
+                            <div class="col">
+                                <label for="exampleDataList" class="form-label">To</label>
+                                <input type="date" class="form-control form-control-sm" name="to" value="{{ to }}">
+
+                            </div>
+
+
+                            <div class="col ">
+                                <a href="#" onclick="$('#search-form').submit();" role="button"
+                                   class="btn btn-sm bt " style="margin-top: 30px"><i
+                                        class="fas fa-search"></i> Search</a>
+                                <a role="button" id="csv" class="btn btn-sm " style="margin-top: 30px"
+                                   href="#"><i class="fas fa-download"></i> Download</a>
+                            </div>
+                        </div>
+                        <p class="text-danger">{{ date_error }}</p>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-sm" id="example">
+                <thead>
+                <tr>
+                    <th class="id" style="display: none">Id</th>
+                    <th>Transaction Id</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Account</th>
+                    <th scope="col">Reference No</th>
+                    <th scope="col">Amount</th>
+                    <th class="id">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for object in  object_list %}
+                    <tr>
+                        <td class="id" style="display: none"> {{ object.id }}</td>
+                        <td> {{ object.transaction_id }}</td>
+                        <td> {{ object.date |date:'Y-m-d' }}</td>
+                        <td> {{ object.category }}</td>
+                        <td> {{ object.account }}</td>
+                        <td> {{ object.reference_no }}</td>
+                        <td>Rs {{ object.total_amount |floatformat:2 }}</td>
+                        <td class="id">
+                            <div class="d-grid gap-2 d-md-block">
+                                <a role="button" href="{% url 'transaction:transaction-update' object.id %}"
+                                   class="btn btn-warning btn-sm text-white" type="button"><i class="fas fa-edit"></i>
+                                    Edit</a>
+                                <button class="btn btn-danger btn-sm delete-btn" type="button"><i
+                                        class="fas fa-trash-alt"></i>
+                                    Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+{% endblock %}
+
+
+{% block model %}
+    {% include 'common/delete-model.html' with delete_link=delete_url %}
+{% endblock %}
+
+{% block script %}
+
+    <script>
+
+        $('#csv').on('click', function () {
+            $("#example").tableHTMLExport({type: 'csv', filename: 'transaction.csv', ignoreColumns: '.id',});
+        })
+
+    </script>
+{% endblock %}

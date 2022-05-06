@@ -22,7 +22,8 @@ from core.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('demo', include("demo.urls")),
+    path('items/', include('items.urls')),
+    path('supplier/', include('supplier.urls')),
     path('', index),
 ]
 

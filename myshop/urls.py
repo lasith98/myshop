@@ -22,7 +22,9 @@ from core.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('demo', include("demo.urls")),
+    path('transaction/', include("transaction.urls")),
+    path('account/', include("account.urls")),
+    path('balance/sheet/', include("balance_sheet.urls")),
     path('', index),
 ]
 

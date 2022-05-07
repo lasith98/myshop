@@ -1,0 +1,156 @@
+{% extends 'layout/dashboard-layout.html' %}
+
+
+{% block content %}
+    <form action="" method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <a href="{% url 'balance_sheet:balance_sheet-list' %}" style="text-decoration: none;color: black"><h3>
+            Balance Sheet</h3></a>
+
+
+        <div class="card rounded">
+
+            <div class="card-header {% if object %} bg-warning {% else %} bg-success {% endif %} ">
+                <h5 class="text-white">
+
+                    {% if object %} Update{% else %}New {% endif %}
+                </h5>
+            </div>
+
+            <div class="card-body">
+
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <label for="balance_sheet_id" class="form-label">Balance Sheet Id</label>
+                        <input type="text" class="form-control" id="balance_sheet_id"
+                               value="{% if object.balance_sheet_id %} {{ object.balance_sheet_id }}{% else %}{{ uid }}{% endif %} "
+                               name="balance_sheet_id"
+                               readonly>
+                    </div>
+                    <div class="col">
+                        <label for="date" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="date" value="{{ object.date |date:'Y-m-d' }}"
+                               required
+                               name="date">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please choose a date.
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <label for="liabilities" class="form-label">Liabilities</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="inputGroupPrepend">Rs</span>
+                            <input type="number" class="form-control" id="liabilities"
+                                   value="{{ object.liabilities }}" required name="liabilities">
+                            <div class="invalid-feedback">
+                                Please provide a Liabilities.
+                            </div>
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="equity" class="form-label">Equity</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="inputGroupPrepend">Rs</span>
+                            <input type="number" class="form-control" id="equity"
+                                   value="{{ object.equity }}" required name="equity">
+                            <div class="invalid-feedback">
+                                Please provide a equity.
+                            </div>
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="asset" class="form-label">Asset</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend">Rs</span>
+                        <input type="number" class="form-control" id="asset"
+                               value="{{ object.asset }}" required name="asset" readonly>
+                        <div class="invalid-feedback">
+                            Please provide a asset.
+                        </div>
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class=" col text-center justify-content-center align-self-center">
+                        <button type="submit"
+                                class="btn text-white {% if object %} bg-warning {% else %} bg-success {% endif %}"
+                                style="width: 100px; margin-right: 100px">
+                            {% if object %} Update{% else %}Save {% endif %}
+                        </button>
+                        <button type="reset" class="btn btn-danger" style="width: 100px">Clear</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </form>
+
+
+{% endblock %}
+
+
+{% block script %}
+
+
+    <script type="application/javascript">
+
+        $(document).ready(function () {
+
+            const equity = $("#equity");
+            const liabilities = $("#liabilities");
+            equity.on('input', function (e) {
+                cal_asset();
+            })
+
+            liabilities.on('input', function (e) {
+                cal_asset();
+            })
+
+
+            function cal_asset() {
+
+                let liabilities_val = 0
+                let equity_val = 0
+                if (equity.val() === '') {
+                    equity_val = 0
+                } else {
+                    equity_val = equity.val()
+                }
+                if (liabilities.val() === '') {
+                    liabilities_val = 0
+                } else {
+                    liabilities_val = liabilities.val()
+                }
+
+                const asset = $("#asset")
+                asset.val(Number(equity_val) + Number(liabilities_val))
+
+            }
+
+
+        })
+
+    </script>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'layout/dashboard-layout.html' %}
+
+{% block content %}
+
+
+    <a href="{% url 'account:account-list' %}" style="text-decoration: none;color: #212529"><h3>Account</h3>
+    </a>
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <div class="row">
+                <div class="col">
+                    <a role="button" class="btn btn-success" style="color: whitesmoke"
+                       href="{% url 'account:account-create' %}"><i class="fas fa-plus"></i> New Account</a>
+                </div>
+                <div class="col">
+                    <form action="" method="get" id="search-form">
+                        <div class="row">
+
+
+                            <div class="col">
+                                <label for="exampleDataList" class="form-label">Account No</label>
+                                <input class="form-control form-control-sm" id="exampleDataList"
+                                       placeholder="Type to search..." name="query" value="{{ query }}">
+                            </div>
+
+
+                            <div class="col ">
+                                <a href="#" onclick="$('#search-form').submit();" role="button"
+                                   class="btn btn-sm bt " style="margin-top: 30px"><i
+                                        class="fas fa-search"></i> Search</a>
+                                <a role="button" id="csv" class="btn btn-sm " style="margin-top: 30px"
+                                   href="#"><i class="fas fa-download"></i> Download</a>
+                            </div>
+                        </div>
+                        <p class="text-danger">{{ date_error }}</p>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-sm" id="example">
+                <thead>
+                <tr>
+                    <th class="id" style="display: none">Id</th>
+                    <th scope="col">Account No</th>
+                    <th scope="col">Account Name</th>
+                    <th scope="col">Bank</th>
+                    <th scope="col">Barch Code</th>
+                    <th scope="col">Account Type</th>
+                    <th class="id">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for object in  object_list %}
+                    <tr>
+                        <td class="id" style="display: none"> {{ object.id }}</td>
+                        <td> {{ object.account_no }}</td>
+                        <td> {{ object.account_name }}</td>
+                        <td> {{ object.bank_name }}</td>
+                        <td>{{ object.barch_code }}</td>
+                        <td>{{ object.type }}</td>
+                        <td class="id">
+                            <div class="d-grid gap-2 d-md-block">
+                                <a role="button" href="{% url 'account:account-update' object.id %}"
+                                   class="btn btn-warning btn-sm text-white" type="button"><i class="fas fa-edit"></i>
+                                    Edit</a>
+                                <button class="btn btn-danger btn-sm delete-btn" type="button"><i
+                                        class="fas fa-trash-alt"></i>
+                                    Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+{% endblock %}
+
+
+{% block model %}
+    {% include 'common/delete-model.html' with delete_link=delete_url %}
+{% endblock %}
+
+{% block script %}
+
+    <script>
+
+        $('#csv').on('click', function () {
+            $("#example").tableHTMLExport({type: 'csv', filename: 'account.csv', ignoreColumns: '.id',});
+        })
+
+    </script>
+{% endblock %}

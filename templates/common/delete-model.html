@@ -1,0 +1,46 @@
+<form action="{{ delete_link }}" method="post" id="delete-form">
+    {% csrf_token %}
+    <div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center bg-danger text-white">
+                    <h4 class="modal-title  font-weight-bold">Delete</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">
+                        No
+                    </button>
+                    <button type="submit" class="btn btn-light">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<script>
+
+    $(document).ready(function () {
+
+        $('.delete-btn').on('click', function () {
+
+            $('#delete-modal').modal('show');
+            $tr = $(this).closest('tr');
+            var data = $tr.children('td').map(function () {
+                return $(this).text();
+            }).get();
+            let form = $('#delete-form')
+            const url = form.attr('action');
+            form.attr('action', url.substring(0, url.lastIndexOf("/")) + "/" + data[0].trim())
+
+
+        });
+
+    })
+
+</script>

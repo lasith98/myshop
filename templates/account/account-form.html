@@ -1,0 +1,160 @@
+{% extends 'layout/dashboard-layout.html' %}
+
+
+{% block content %}
+    <form action="" method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <a href="{% url 'account:account-list' %}" style="text-decoration: none;color: black"><h3>
+            Account</h3></a>
+
+
+        <div class="card rounded">
+
+            <div class="card-header {% if object %} bg-warning {% else %} bg-success {% endif %} ">
+                <h5 class="text-white">
+
+                    {% if object %} Update{% else %}New {% endif %}
+                </h5>
+            </div>
+
+            <div class="card-body">
+
+
+                <div class="row mb-4">
+
+                    <div class="col">
+                        <label for="date" class="form-label">Account No</label>
+                        <input type="text" class="form-control" id="account_no" value="{{ object.account_no }}"
+                               required
+                               name="account_no">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a valid Account No
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <label for="account_name" class="form-label">Account Name</label>
+                        <input type="text" class="form-control" id="account_name " value="{{ object.account_name }}"
+                               required
+                               name="account_name">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a valid Account Name
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mb-4">
+
+                    <div class="col">
+                        <label for="bank_name" class="form-label">Bank name</label>
+                        <input type="text" class="form-control" id="bank_name" value="{{ object.bank_name }}"
+                               required
+                               name="bank_name">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a valid Bank Name
+                        </div>
+                    </div>
+
+
+                    <div class="col">
+                        <label for="barch_code" class="form-label">Barch Code</label>
+                        <input type="text" class="form-control" id="barch_code" value="{{ object.barch_code }}"
+                               required
+                               name="barch_code">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a valid Barch Code
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row mb-4">
+
+
+
+                    <div class="col">
+                        <label for="type" class="form-label">Account Type</label>
+                        <select class="form-select" id="type" required name="type">
+                            <option selected disabled value="">Choose...</option>
+                            <option value="Savings account" {% if object.type == "Savings account" %}
+                                    selected {% endif %} >
+                                Savings account
+                            </option>
+                            <option value="Salary account" {% if object.type == "Salary account" %}
+                                    selected {% endif %}> Salary account
+                            </option>
+                            <option value="Fixed deposit account" {% if object.type == "Fixed deposit account" %}
+                                    selected {% endif %}> Fixed deposit account
+                            </option>
+                            <option value="Recurring deposit account"
+                                    {% if object.type == "Recurring deposit account" %} selected {% endif %}>
+                                Recurring deposit account
+                            </option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a Account type.
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+
+
+                  <div class="col">
+                        <label for="phone_number" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone_number" value="{{ object.phone_number }}"
+                               required
+                               maxlength="10"
+                               name="phone_number">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a valid  Phone Number
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class=" col text-center justify-content-center align-self-center">
+                        <button type="submit"
+                                class="btn text-white {% if object %} bg-warning {% else %} bg-success {% endif %}"
+                                style="width: 100px; margin-right: 100px">
+                            {% if object %} Update{% else %}Save {% endif %}
+                        </button>
+                        <button type="reset" class="btn btn-danger" style="width: 100px">Clear</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </form>
+
+
+{% endblock %}
+
+
+{% block model %}
+
+{% endblock %}

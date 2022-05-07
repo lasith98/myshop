@@ -48,15 +48,15 @@
                         <label for="account" class="form-label">Account</label>
                         <select class="form-select" id="account" required name="account">
                             <option selected disabled value="">Choose...</option>
-                            <option value="Malabe BOC" {% if object.account == "Malabe BOC" %} selected {% endif %} >
-                                Malabe BOC
-                            </option>
-                            <option value="Galle HNB" {% if object.account == "Galle HNB" %} selected {% endif %}> Galle
-                                HNB
-                            </option>
-                            <option value="Kandy Sampath" {% if object.account == "Kandy Sampath" %}
-                                    selected {% endif %}> Galle Sampath
-                            </option>
+
+                            {% for account in accounts %}
+                                <option value="{{ account.id }}" {% if object.account.id == account.id %}
+                                        selected {% endif %} >
+                                    {{ account.account_name }}
+                                </option>
+                            {% endfor %}
+
+
                         </select>
                         <div class="invalid-feedback">
                             Please select a account.
@@ -69,15 +69,15 @@
                         <label for="account" class="form-label">Category</label>
                         <select class="form-select" id="account" required name="category">
                             <option selected disabled value="">Choose...</option>
-                            <option value="Water bills" {% if object.account == "Water bills" %} selected {% endif %} >
+                            <option value="Water bills" {% if object.category == "Water bills" %} selected {% endif %} >
                                 Water bills
                             </option>
-                            <option value="Electricity bill" {% if object.account == "Electricity bill" %}
+                            <option value="Electricity bill" {% if object.category == "Electricity bill" %}
                                     selected {% endif %}> Electricity bill
                             </option>
-                            <option value="Travel" {% if object.account == "Travel" %} selected {% endif %}> Travel
+                            <option value="Travel" {% if object.category == "Travel" %} selected {% endif %}> Travel
                             </option>
-                            <option value="Other" {% if object.account == "Other" %} selected {% endif %}> Other
+                            <option value="Other" {% if object.category == "Other" %} selected {% endif %}> Other
                             </option>
                         </select>
                         <div class="invalid-feedback">

@@ -3,7 +3,7 @@
 {% block content %}
 
 
-    <a href="{% url 'transaction:transaction-list' %}" style="text-decoration: none;color: #212529"><h3>Transaction</h3>
+    <a href="{% url 'balance_sheet:balance_sheet-list' %}" style="text-decoration: none;color: #212529"><h3>Balance Sheet</h3>
     </a>
 
 
@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col">
                     <a role="button" class="btn btn-success" style="color: whitesmoke"
-                       href="{% url 'transaction:transaction-create' %}"><i class="fas fa-plus"></i> New Transaction</a>
+                       href="{% url 'balance_sheet:balance_sheet-create' %}"><i class="fas fa-plus"></i> New Balance Sheet</a>
                 </div>
                 <div class="col">
                     <form action="" method="get" id="search-form">
@@ -21,19 +21,11 @@
 
 
                             <div class="col">
-                                <label for="exampleDataList" class="form-label">Transaction Id</label>
+                                <label for="exampleDataList" class="form-label">Balance Sheet Id</label>
                                 <input class="form-control form-control-sm" id="exampleDataList"
                                        placeholder="Type to search..." name="query" value="{{ query }}">
                             </div>
-                            <div class="col">
-                                <label for="exampleDataList" class="form-label">From</label>
-                                <input type="date" class="form-control form-control-sm" name="from" value="{{ from }}">
-                            </div>
-                            <div class="col">
-                                <label for="exampleDataList" class="form-label">To</label>
-                                <input type="date" class="form-control form-control-sm" name="to" value="{{ to }}">
 
-                            </div>
 
 
                             <div class="col ">
@@ -58,12 +50,11 @@
                 <thead>
                 <tr>
                     <th class="id" style="display: none">Id</th>
-                    <th>Transaction Id</th>
+                    <th>Balance Sheet Id</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Account</th>
-                    <th scope="col">Reference No</th>
-                    <th scope="col">Amount</th>
+                    <th scope="col">Liabilities</th>
+                    <th scope="col">Equality</th>
+                    <th scope="col">Asset</th>
                     <th class="id">Action</th>
                 </tr>
                 </thead>
@@ -72,15 +63,14 @@
                 {% for object in  object_list %}
                     <tr>
                         <td class="id" style="display: none"> {{ object.id }}</td>
-                        <td> {{ object.transaction_id }}</td>
+                        <td> {{ object.balance_sheet_id }}</td>
                         <td> {{ object.date |date:'Y-m-d' }}</td>
-                        <td> {{ object.category }}</td>
-                        <td> {{ object.account.account_name }}</td>
-                        <td> {{ object.reference_no }}</td>
-                        <td>Rs {{ object.total_amount |floatformat:2 }}</td>
+                        <td>Rs {{ object.liabilities|floatformat:2 }}</td>
+                        <td>Rs {{ object.equity |floatformat:2}}</td>
+                        <td>Rs  {{ object.asset |floatformat:2}}</td>
                         <td class="id">
                             <div class="d-grid gap-2 d-md-block">
-                                <a role="button" href="{% url 'transaction:transaction-update' object.id %}"
+                                <a role="button" href="{% url 'balance_sheet:balance_sheet-update' object.id %}"
                                    class="btn btn-warning btn-sm text-white" type="button"><i class="fas fa-edit"></i>
                                     Edit</a>
                                 <button class="btn btn-danger btn-sm delete-btn" type="button"><i
@@ -117,7 +107,7 @@
     <script>
 
         $('#csv').on('click', function () {
-            $("#example").tableHTMLExport({type: 'csv', filename: 'transaction.csv', ignoreColumns: '.id',});
+            $("#example").tableHTMLExport({type: 'csv', filename: 'balance_sheet.csv', ignoreColumns: '.id',});
         })
 
     </script>

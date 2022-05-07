@@ -36,8 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'transaction',
-    'demo',
+    'account',
     "bootstrap5",
+    'balance_sheet',
     'widget_tweaks',
 ]
 

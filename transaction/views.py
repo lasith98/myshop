@@ -5,6 +5,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 
 # Create your views here.
+from account.models import Account
 from transaction.models import Transaction
 
 
@@ -59,6 +60,8 @@ class TransactionCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["uid"] = uuid.uuid4().hex.upper()[0:6]
+        context["accounts"] = Account.objects.all()
+
         return context
 
 
@@ -67,6 +70,13 @@ class TransactionUpdateView(UpdateView):
     template_name = "transaction/transaction-form.html"
     success_url = reverse_lazy('transaction:transaction-list')
     fields = "__all__"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["accounts"] = Account.objects.all()
+
+        return context
 
 
 class TransactionDeleteView(DeleteView):

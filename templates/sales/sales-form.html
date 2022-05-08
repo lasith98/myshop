@@ -1,0 +1,149 @@
+{% extends 'layout/dashboard-layout.html' %}
+
+{% block content %}
+
+    <form action="" method="post" class="requires-validation" novalidate>
+       {% csrf_token %}
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <a style="color: #412885" href="{% url 'sales:sales-list' %}"><i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+            </br>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" id="customer" aria-describedby="customer" placeholder="Customer" name="customer" value="{{ object.customer }}" required>
+                        <div class="valid-feedback">
+                            looks good!
+                         </div>
+                         <div class="invalid-feedback">
+                            Customer is required
+                         </div>
+                    </div>
+                    <div class="col">
+                        <textarea type="text" class="form-control" id="address" aria-describedby="address" placeholder="Address" name="address" value="{{ object.address }}" required></textarea>
+                        <div class="valid-feedback">
+                            looks good!
+                         </div>
+                         <div class="invalid-feedback">
+                            Address is required
+                         </div>
+                    </div>
+                </div>
+            </br>
+            <div class="row">
+                <div class="col">
+                    <span class="text-secondary">Date</span>
+                    <input type="date" class="form-control" id="date" aria-describedby="date" placeholder="Date" name="date" value="{{ object.date }}" required>
+                    <div class="valid-feedback">
+                        looks good!
+                     </div>
+                     <div class="invalid-feedback">
+                        Date is required
+                     </div>
+                </div>
+                <div class="col">
+                    <span class="text-secondary">Due Date</span>
+                    <input type="date" class="form-control" id="due_date" aria-describedby="due_date" placeholder="Due Date" name="due_date" value="{{ object.due_date }}" required>
+                    <div class="valid-feedback">
+                        looks good!
+                     </div>
+                     <div class="invalid-feedback">
+                        Due Date is required
+                     </div>
+                </div>
+            </div>
+        </br>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" id="item_name" aria-describedby="item_name" placeholder="Item Name" name="item_name" value="{{ object.item_name }}" required>
+                    <div class="valid-feedback">
+                        looks good!
+                     </div>
+                     <div class="invalid-feedback">
+                        Item Name is required
+                     </div>
+                </div>
+                <div class="col">
+                    <input type="number" class="form-control" id="unit_price" aria-describedby="unit_price" placeholder="unit Price" name="unit_price" value="{{ object.unit_price }}" required>
+                    <div class="valid-feedback">
+                        looks good!
+                     </div>
+                     <div class="invalid-feedback">
+                        Unit Price is required
+                     </div>
+                </div>
+            </div>
+        </br>
+            <div class="row">
+                <div class="col">
+                    <input type="number" class="form-control" id="quantity" aria-describedby="quantity" placeholder="Quantity" name="quantity" value="{{ object.quantity }}" onchange="myFunction(event)"  required>
+                    <div class="valid-feedback">
+                        looks good!
+                     </div>
+                     <div class="invalid-feedback">
+                        Quantity is required
+                     </div>
+                </div>
+                <div class="col">
+                    <input type="number" class="form-control" id="amount" aria-describedby="amount" placeholder="Amount" name="amount" value="{{ object.amount }}" readonly>
+                    <div class="valid-feedback">
+                        looks good!
+                     </div>
+                     <div class="invalid-feedback">
+                        Amount is required
+                     </div>
+                </div>
+            </div>
+            </br>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        
+                    <div class="col">
+                        <button class="btn btn-danger" style="float: right;">Reset</button>
+
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-success">Save</button>
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        function myFunction(e) {
+             
+            var price = document.getElementById("unit_price").value
+            var quan = document.getElementById("quantity").value
+            document.getElementById("amount").value = parseInt(price * quan)
+        }
+    </script>
+            <script>
+                (function () {
+                'use strict'
+                const forms = document.querySelectorAll('.requires-validation')
+                Array.from(forms)
+                  .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                  
+                      form.classList.add('was-validated')
+                    }, false)
+                  })
+                })()
+                    </script>
+
+
+{% endblock %}
+{% block model %}
+{% endblock %}

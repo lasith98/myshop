@@ -1,0 +1,111 @@
+{% extends 'layout/dashboard-layout.html' %}
+
+{% block content %}
+
+
+
+
+<div class="card">
+
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-10">
+                <h1>Sales</h1>
+            </div>
+            <div class="col-md-2">
+                <a href="{% url 'sales:sales-create' %}" class="btn btn-success"><i class="fas fa-plus"></i> Add Sales</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <form action="{% url 'sales:sales-search' %}" method="GET" id="form1">
+                    <input type="text" placeholder="Search Sales ID" name="search" id="search"
+                        class="form-control col-xs-3">
+                </form>
+            </div>
+            <div class="col-md-2 ">
+                <button value="Submit" id="btn1" onclick="SearchVal();" class="btn btn-link"><i
+                        class="fas fa-search "></i></button>
+            </div>
+            <div class="col-md-2">
+                <a href="{% url 'sales:sales-report' %}" role="button"
+            class="btn  edit-btn float-left" style="padding: 0 0 0 0"><i
+                 class="fa fa-download fa-lg"></i>&nbsp;Print Report</a>
+            </div>
+        </div>
+    </div></br>
+
+    <div class="card-body">
+
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Sales Id</th>
+                    <th scope="col">Sales Order No</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Shipping Address</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                {% for object in object_list %}
+                <tr>
+                    <th scope="row">{{ object.id }}</th>
+                    <th scope="row">{{ object.sales_id }}</th>
+                    <th scope="row">{{ object.customer }}</th>
+                    <th scope="row">{{ object.due_date }}</th>
+                    <th scope="row">{{ object.address }}</th>
+                    <th scope="row"><a href="{% url 'sales:sales-update' object.id %}" role="button" class="btn  edit-btn btn-warning"><i class="fas fa-edit fa-lg"></i>Update</a></th>
+                    <th scope="row">
+                        <form action="{% url 'sales:sales-delete' object.id %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn delete-btn  btn-danger" type="submit"
+                                onclick="return confirm('Are you sure you want to delete?')"><i
+                                    class="far fa-trash-alt m-1"></i> Delete
+                            </button>
+                        </form>
+                    </th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    function SearchVal() {
+        var val = document.getElementById('search').value;
+        if (/[^S0-9]/.test(val)) {
+            alert('Can only contain "S" character ID.');
+            document.getElementById('search').value = null;
+                    return false;
+        }else if( val.length  < 4 && val.length != 0){ 
+                    alert("ID should be  more than 3 characters.");
+                    return false;
+        
+        }else if( val.charAt(1)  != 0 || val.charAt(2)  != 0){ 
+                    alert("ID should be  start with 'S00' characters.");
+                    return false;
+        
+        }else
+            document.getElementById("form1").submit();
+            return (true);
+        }
+</script>
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block model %}
+
+{% endblock %}

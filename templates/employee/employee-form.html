@@ -1,0 +1,106 @@
+{% extends 'layout/dashboard-layout.html' %}
+
+{% block content %}
+
+    <form action="" method="post" class="requires-validation" novalidate>
+       {% csrf_token %}
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <a style="color: #412885" href="{% url 'employee:employee-list' %}"><i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+            </br>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" id="first_name" aria-describedby="first_name" placeholder="First Name" name="first_name" value="{{ object.first_name }}" required>
+                        <div class="valid-feedback">
+                            looks good!
+                         </div>
+                         <div class="invalid-feedback">
+                            First Name is required!
+                         </div>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" id="last_name" aria-describedby="last_name" placeholder="Last Name" name="last_name" value="{{ object.last_name }}" required>
+                        <div class="valid-feedback">
+                            looks good!
+                         </div>
+                         <div class="invalid-feedback">
+                            Last Name is required!
+                         </div>
+                    </div>
+                </div>
+            </br>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" id="email" aria-describedby="email" placeholder="Email" name="email" value="{{ object.email }}" required>
+                    <div class="valid-feedback">
+                        looks good!
+                     </div>
+                     <div class="invalid-feedback">
+                        Email is required!
+                     </div>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="contact" maxlength="10" pattern="[0]{1}[7]{1}[0-9]{8}" aria-describedby="contact" placeholder="Contact" name="contact" value="{{ object.contact }}" required>
+                    <div class="valid-feedback">
+                        looks good!
+                     </div>
+                     <div class="invalid-feedback">
+                        Number is required in correct form.
+                     </div>
+                </div>
+            </div>
+            </br>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" id="occupation" aria-describedby="occupation" placeholder="Occupation" name="occupation" value="{{ object.occupation }}" required>
+                    <div class="valid-feedback">
+                        looks good!
+                     </div>
+                     <div class="invalid-feedback">
+                        Occupation is required!
+                     </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        
+                    <div class="col">
+                        <button class="btn btn-danger" type="Reset" style="float: right;">Reset</button>
+
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-success">Save</button>
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        (function () {
+        'use strict'
+        const forms = document.querySelectorAll('.requires-validation')
+        Array.from(forms)
+          .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+          
+              form.classList.add('was-validated')
+            }, false)
+          })
+        })()
+            </script>
+        
+
+{% endblock %}
+{% block model %}
+{% endblock %}

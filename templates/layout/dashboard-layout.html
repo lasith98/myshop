@@ -4,40 +4,60 @@
 {% block body %}
     <div class="wrapper">
         <div class="sidebar">
-            <img src="{% static 'img/store.png' %}" alt="logo" width="30" height="50" style="margin-bottom: 10px">
+            <img src="{% static 'img/store.png' %}" alt="logo" width="50" height="70" style="margin-bottom: 10px">
             <h5>MY SHOP</h5>
             <ul>
                 <li>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-users"></i>
-                        <a  type="button" id="hr" onclick="drp('hrd')"></i>
-                            Human Resource
-                        </a>
-                        <div id="hrd" style="display: none;"></br>
-                          <a class="dropdown-item" href="#">Employee</a>
-                          <a class="dropdown-item" href="#">Salary</a>
+                    <a data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false"
+                       aria-controls="collapseExample"><i class="fas fa-users"></i>Human Resource</a>
+                    <div class="collapse" id="collapseExample1">
+                        <div class="container mt-3 ">
+                            <div class="mb-4 border-bottom "><a href=""
+                                                                class="ms-2"> Employee</a></div>
+                            <div class="mb-4 border-bottom"><a href="" class="ms-2">Salary </a>
+                            </div>
                         </div>
+                    </div>
+                </li>
+                <li>
+                    <a data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false"
+                       aria-controls="collapseExample"><i class="fas fa-search-dollar"></i>Sales & Marketing</a>
+                    <div class="collapse" id="collapseExample2">
+                        <div class="container mt-3 ">
+                            <div class="mb-4 border-bottom "><a href=""
+                                                                class="ms-2"> Sales</a></div>
+                            <div class="mb-4 border-bottom"><a href="" class="ms-2">Purchase</a>
+                            </div>
 
+                        </div>
+                    </div>
                 </li>
                 <li>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-search-dollar"></i>
-                    <a type="button" id="snm" onclick="drp('snmd')">Sales & Marketing</a>
-                    <div id="snmd" style="display: none;"></br>
-                      <a class="dropdown-item" href="#">Sales</a>
-                      <a class="dropdown-item" href="#">Purchase</a>
+                    <a data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false"
+                       aria-controls="collapseExample"><i class="fas fa-hand-holding-usd"></i>Finance</a>
+                    <div class="collapse" id="collapseExample3">
+                        <div class="container mt-3 ">
+                            <div class="mb-4 border-bottom "><a href=""
+                                                                class="ms-2"> Transaction</a></div>
+                            <div class="mb-4 border-bottom"><a href="" class="ms-2">Account </a>
+                            </div>
+                            <div class="mb-4 border-bottom"><a href=""
+                                                               class="ms-2">Balance sheet</a></div>
+                        </div>
                     </div>
-                
                 </li>
                 <li>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-hand-holding-usd"></i>
-                    <a href=""></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finance</a></li>
-                <li>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-hotel"></i>
-                    <a type="button" id="inv" onclick="drp('invd')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inventory</a>
-                    <div id="invd" style="display: none;"></br>
-                      <a class="dropdown-item" href="{% url 'items:items-list' %}">Items</a>
-                      <a class="dropdown-item" href="{% url 'supplier:supplier-list' %}">Suppliers</a>
+                    <a data-bs-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false"
+                       aria-controls="collapseExample"><i class="fas fa-hotel"></i>Inventory</a>
+                    <div class="collapse" id="collapseExample4">
+                        <div class="container mt-3 ">
+                            <div class="mb-4 border-bottom "><a href="{% url 'supplier:supplier-list' %}"
+                                                                class="ms-2"> Items</a></div>
+                            <div class="mb-4 border-bottom"><a href="{% url 'supplier:supplier-list' %}" class="ms-2">Suppliers </a>
+                            </div>
+
+                        </div>
                     </div>
-                
                 </li>
                 <li><a href=""><i class="fas fa-sign-out-alt"></i>Logout</a></li>
             </ul>
@@ -51,17 +71,6 @@
             </div>
         </div>
     </div>
-    <script>
-        function drp(x){
-            if(document.getElementById(x).style.display == "none"){
-                document.getElementById(x).style.display = "block";
-            }else{
-                
-            document.getElementById(x).style.display = "none";
-            }
-        }
-    </script>
-
 
 
 {% endblock %}

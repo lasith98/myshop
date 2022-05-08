@@ -1,5 +1,4 @@
-from unittest import result
-from attr import fields
+
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.db.models import Q

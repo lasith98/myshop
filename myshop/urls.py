@@ -13,25 +13,27 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from decorator_include import decorator_include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 
 from core.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('transaction/', include("transaction.urls")),
-    path('account/', include("account.urls")),
-    path('balance/sheet/', include("balance_sheet.urls")),
-    path('items/', include('items.urls')),
-    path('supplier/', include('supplier.urls')),
-    path('sales/', include('sales.urls')),
-    path('purchase/', include('purchase.urls')),
-    path('employee/', include('employee.urls')),
-    path('salary/', include('salary.urls')),
-    path('', index),
+    path('transaction/', decorator_include(login_required,include("transaction.urls"))),
+    path('account/', decorator_include(login_required,include("account.urls"))),
+    path('balance/sheet/', decorator_include(login_required,include("balance_sheet.urls"))),
+    path('items/', decorator_include(login_required,include('items.urls'))),
+    path('supplier/', decorator_include(login_required,include('supplier.urls'))),
+    path('sales/', decorator_include(login_required,include('sales.urls'))),
+    path('purchase/', decorator_include(login_required,include('purchase.urls'))),
+    path('employee/', decorator_include(login_required,include('employee.urls'))),
+    path('salary/', decorator_include(login_required,include('salary.urls'))),
+    path('', include('core.urls')),
 ]
 
 if settings.DEBUG:

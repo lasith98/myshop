@@ -1,9 +1,4 @@
-from django.shortcuts import render
 
-# Create your views here.
-from unittest import result
-from attr import fields
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView

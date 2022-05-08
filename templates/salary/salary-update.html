@@ -1,0 +1,209 @@
+{% extends 'layout/dashboard-layout.html' %}
+
+{% block content %}
+
+    <form action="" method="post"  class="requires-validation"  novalidate>
+       {% csrf_token %}
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <a style="color: #412885" href="{% url 'salary:salary-list' %}" id="a1"><i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+            </br>
+            <div class="row">
+                <div class="col">
+                    <h2><p id="p1"></p></h2>
+                </div>
+                <div class="col">
+                    
+                </div>
+            </div>
+    </br>
+    <div class="row">
+        <div class="col">
+            <input type="text" class="form-control" id="emp_id" aria-describedby="emp_id" placeholder="ID" name="emp_id" value="{{ object.emp_id }}" required>
+            <div class="valid-feedback">
+                looks good!
+             </div>
+             <div class="invalid-feedback">
+                ID is required!
+             </div>
+        </div>
+    </div>
+</br>
+        </br>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" id="first_name" aria-describedby="first_name" placeholder="First Name" name="first_name" value="{{ object.first_name }}" required>
+                        <div class="valid-feedback">
+                            looks good!
+                         </div>
+                         <div class="invalid-feedback">
+                            First Name is required!
+                         </div>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" id="last_name" aria-describedby="last_name" placeholder="Last Name" name="last_name" value="{{ object.last_name }}" required>
+                        <div class="valid-feedback">
+                            looks good!
+                         </div>
+                         <div class="invalid-feedback">
+                            Last Name is required!
+                         </div>
+                    </div>
+                </div>
+            </br>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" id="nic" aria-describedby="nic" placeholder="NIC Number" name="nic" value="{{ object.nic }}" required>
+                    <div class="valid-feedback">
+                        looks good!
+                     </div>
+                     <div class="invalid-feedback">
+                        NIC Number is required!
+                     </div>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="bank" aria-describedby="bank" placeholder="Bank details" name="bank" value="{{ object.bank }}" required>
+                    <div class="valid-feedback">
+                        looks good!
+                     </div>
+                     <div class="invalid-feedback">
+                        Bank details is required!
+                     </div>
+                </div>
+            </div>
+            </br>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" id="pay_period" aria-describedby="pay_period" placeholder="Pay Period" name="pay_period" value="{{ object.pay_period }}" required>
+                    <div class="valid-feedback">
+                        looks good!
+                     </div>
+                     <div class="invalid-feedback">
+                        Pay Period is required!
+                     </div>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="tax_no" aria-describedby="tax_no" placeholder="Tax Number" name="tax_no" value="{{ object.tax_no }}" required>
+                    <div class="valid-feedback">
+                        looks good!
+                     </div>
+                     <div class="invalid-feedback">
+                        Tax Number is required!
+                     </div>
+                </div>
+                </div>
+            </br>
+            <table class="table table-light">
+                <thead>
+                  <tr>
+                    <th scope="col">Earnings</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Deduction</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Basic Salary</td>
+                    <td><input type="number" class="form-control" id="basic_salary" aria-describedby="basic_salary"  name="basic_salary" value="{{ object.basic_salary }}" required>
+                        <div class="valid-feedback">
+                            looks good!
+                         </div>
+                         <div class="invalid-feedback">
+                            Basic salary is required!
+                         </div>
+                    </td>
+                    <td>Taxation</td>
+                    <td><input type="number" class="form-control" id="taxation" required>
+                        <div class="valid-feedback">
+                            looks good!
+                         </div>
+                         <div class="invalid-feedback">
+                            Taxation is required!
+                         </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Others</td>
+                    <td><input type="number" class="form-control" id="others" required>
+                        <div class="valid-feedback">
+                            looks good!
+                         </div>
+                         <div class="invalid-feedback">
+                            this field is required else put 0
+                         </div>
+                    
+                    </td>
+                  </tr>
+                  <tr></tr>
+                  <tr>
+                    <td>Net Salary</td>
+                    <td><input type="number" class="form-control" id="net_salary" aria-describedby="net_salary"  name="net_salary" value="{{ object.net_salary }}" readonly></td>
+                    <td>Total Deduction</td>
+                    <td><input type="number" class="form-control" id="dedcutions" aria-describedby="dedcutions"  name="dedcutions" value="{{ object.dedcutions }}" readonly></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><button class="btn btn-success" formaction="#" onclick="calSal()" type="button">Calculate</button></td>
+                  </tr>
+                </tbody>
+
+              </table>
+        </br>
+
+                <div class="row">
+                        
+                    <div class="col">
+                        <button class="btn btn-danger" type="Reset" style="float: right;">Reset</button>
+
+                    </div>
+                    <div class="col">
+                        <input type="submit" class="btn btn-success">
+                    </div>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+        function calSal(){
+            var basic_salary =  document.getElementById("basic_salary").value
+            var taxation =  document.getElementById("taxation").value
+            var others =  document.getElementById("others").value
+            
+            document.getElementById("net_salary").value = parseInt(basic_salary) - (parseInt(taxation) + parseInt(others));
+            document.getElementById("dedcutions").value = parseInt(taxation) + parseInt(others);
+        };
+        </script>
+            <script>
+                (function () {
+                'use strict'
+                const forms = document.querySelectorAll('.requires-validation')
+                Array.from(forms)
+                  .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                  
+                      form.classList.add('was-validated')
+                    }, false)
+                    
+                  })
+                  
+                })()
+                    </script>
+
+
+{% endblock %}
+{% block model %}
+{% endblock %}

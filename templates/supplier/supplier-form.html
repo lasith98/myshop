@@ -1,0 +1,102 @@
+{% extends 'layout/dashboard-layout.html' %}
+
+{% block content %}
+
+    <form action="" method="post" class="requires-validation" novalidate>
+       {% csrf_token %}
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <a style="color: #412885" href="{% url 'supplier:supplier-list' %}"><i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+            </br>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" id="supplier_name" aria-describedby="supplier_name" placeholder="Supplier Name" name="supplier_name" value="{{ object.supplier_name }}" required>
+                        <div class="valid-feedback">
+                            looks good!
+                         </div>
+                         <div class="invalid-feedback">
+                            Supplier Name is required
+                         </div>
+                    </div>
+                    <div class="col">
+                          <input type="text" class="form-control" id="contact" maxlength="10" pattern="[0]{1}[7]{1}[0-9]{8}" aria-describedby="contact" placeholder="Contact" name="contact" value="{{ object.contact }}" required>
+                          <div class="valid-feedback">
+                            looks good!
+                         </div>
+                         <div class="invalid-feedback">
+                            Contact No is required
+                         </div>
+                        </div>
+                </div>
+            </br>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" id="item_name" aria-describedby="item_name" placeholder="Item Name" name="item_name" value="{{ object.item_name }}" required>
+                    <div class="valid-feedback">
+                        looks good!
+                     </div>
+                     <div class="invalid-feedback">
+                        Item Name is required
+                     </div>
+                </div>
+                <div class="col">
+                    <input type="date" class="form-control" id="date" aria-describedby="date" placeholder="Date" name="date" value="{{ object.date }}" required>
+                    <div class="valid-feedback">
+                        looks good!
+                     </div>
+                     <div class="invalid-feedback">
+                        Date is required
+                     </div>
+                </div>
+            </div>
+            </br>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        
+                    <div class="col">
+                        <button class="btn btn-danger" style="float: right;" type="reset">Reset</button>
+
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-success">Save</button>
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        function myFunction(e) {
+        document.getElementById("category").value = e.target.value
+}
+    </script>
+    <script>
+        (function () {
+        'use strict'
+        const forms = document.querySelectorAll('.requires-validation')
+        Array.from(forms)
+          .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+          
+              form.classList.add('was-validated')
+            }, false)
+          })
+        })()
+            </script>
+
+
+{% endblock %}
+{% block model %}
+{% endblock %}

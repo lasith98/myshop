@@ -25,6 +25,8 @@ urlpatterns = [
     path('transaction/', include("transaction.urls")),
     path('account/', include("account.urls")),
     path('balance/sheet/', include("balance_sheet.urls")),
+    path('items/', include('items.urls')),
+    path('supplier/', include('supplier.urls')),
     path('', index),
 ]
 

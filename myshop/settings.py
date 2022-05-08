@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "bootstrap5",
     'balance_sheet',
     'widget_tweaks',
+    'items',
+    'supplier'
 ]
 
 MIDDLEWARE = [

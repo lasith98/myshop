@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'balance_sheet',
     'widget_tweaks',
     'items',
-    'supplier'
+    'supplier',
+    'sales',
+    'purchase'
 ]
 
 MIDDLEWARE = [
